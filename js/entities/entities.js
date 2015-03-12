@@ -28,8 +28,16 @@ game.PlayerEntity = me.Entity.extend({
             //me.timer.tick the movement look smooth
             this.body.vel.x += this.body.accel.x * me.timer.tick;
             this.flipX(true);
-        } else {
+        }else if(me.input.isKeyPressed("left")){
+            this.body.vel.x -= this.body.accel.x * me.timer.tick;
+            this.flipX(false);
+        }else{
             this.body.vel.x = 0;
+        }
+        
+        if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.falling){
+            this.body.jumping = true;
+            this.body.vel.y -= this.body.accel.y * me.timer.tick;
         }
          
         if(me.input.isKeyPressed("attack")){
@@ -39,7 +47,6 @@ game.PlayerEntity = me.Entity.extend({
                 this.renderable.setCurrentAnimation("attack", "idle");
                 //Makes it so that the next time we start this sequence we begin
                 //from the first animation, not wherever we left off when we switched to another animation//
-                this.renderable.setCurrentAnimation("walk");
                 this.renderable.setAnimationFrame();
             }
         }
@@ -58,7 +65,6 @@ game.PlayerEntity = me.Entity.extend({
                 this.renderable.setCurrentAnimation("attack", "idle");
                 //Makes it so that the next time we start this sequence we begin
                 //from the first animation, not wherever we left off when we switched to another animation//
-                this.renderable.setCurrentAnimation("walk");
                 this.renderable.setAnimationFrame();
             }
         }
@@ -80,7 +86,7 @@ game.PlayerBaseEntity = me.Entity.extend({
             spritewidth: "100",
             spriteheight: "100",
             getShape: function() {
-                return (new me.Rect(0, 0, 100, 100)).toPolygon();
+                return (new me.Rect(0, 0, 100, 70)).toPolygon();
             }
         }]);
         this.broken = false;
@@ -120,7 +126,7 @@ game.EnemyBaseEntity = me.Entity.extend({
             spritewidth: "100",
             spriteheight: "100",
             getShape: function() {
-                return (new me.Rect(0, 0, 100, 100)).toPolygon();
+                return (new me.Rect(0, 0, 100, 70)).toPolygon();
             }
         }]);
         this.broken = false;
