@@ -88,7 +88,6 @@ game.PlayerEntity = me.Entity.extend({
     
     loseHealth: function(damage){
         this.health = this.health - damage;
-        console.log(this.health);
     },
     
     collideHandler: function(response){
@@ -115,7 +114,7 @@ game.PlayerEntity = me.Entity.extend({
             }
         }else if(response.b.type==='EnemyCreep'){
             var xdif = this.pos.x - response.b.pos.x;
-            var ydif = this.pos.x - response.b.pos.y;
+            var ydif = this.pos.y - response.b.pos.y;
             
             if (xdif>0){
                 //this.pos.x = this.pos.x + 1;
@@ -128,7 +127,7 @@ game.PlayerEntity = me.Entity.extend({
                     this.body.vel.x = 0;
                 }
             }
-            if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= game.data.playerAttackTimer
+            if(this.renderable.isCurrentAnimation("attack") && (this.now-this.lastHit) >= game.data.playerAttackTimer
                     && (Math.abs(ydif)  <=40) && 
                     (((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))  
                     ){
@@ -258,11 +257,12 @@ game.EnemyCreep = me.Entity.extend({
    },
    
    loseHealth: function(damage){
+       console.log(this.health);
      this.health = this.health - damage;  
    },
    
    update: function (delta){
-       console.log(this.health);
+       
        if(this.health <= 0){
            me.game.world.removeChild(this);
        }
