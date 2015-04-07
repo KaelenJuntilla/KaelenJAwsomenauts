@@ -40,6 +40,8 @@ var game = {
 		alert("Your browser does not support HTML5 canvas.");
 		return;
 	}
+        
+        me.save.add({exp: 0, exp1: 0, exp2: 0, exp4: 0});
 
 	// add "#debug" to the URL to enable the debug Panel
 	if (document.location.hash === "#debug") {
