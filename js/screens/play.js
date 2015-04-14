@@ -16,10 +16,10 @@ game.PlayScreen = me.ScreenObject.extend({
                 var heroDeathManager = me.pool.pull("HeroDeathManager", 0, 0, {});
                 me.game.world.addChild(heroDeathManager, 0);
                 
-                var spendGold = me.pool.pull("ExperienceManager", 0, 0, {});
+                var experienceManager = me.pool.pull("ExperienceManager", 0, 0, {});
                 me.game.world.addChild(experienceManager, 0);
                 
-                var experienceManager = me.pool.pull("SpendGold", 0, 0, {});
+                var spendGold = me.pool.pull("SpendGold", 0, 0, {});
                 me.game.world.addChild(spendGold, 0);
                 
                 me.input.bindKey(me.input.KEY.B, "buy");
